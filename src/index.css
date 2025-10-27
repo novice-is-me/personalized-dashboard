@@ -104,7 +104,7 @@
     rgba(33, 37, 41, 1) 100%
   );
   --card: #ffffff;
-  --border: #e0e0e0;
+  --border: #a0a0a0;
   --card-shadow: rgba(0, 0, 0, 0.1);
 }
 
@@ -224,9 +224,7 @@
   }
 
   .card {
-    background: var(--card-bg);
-    box-shadow: 0 6px 25px var(--card-shadow);
-    @apply p-8 rounded-4xl flex flex-col items-center gap-4 transition-shadow duration-300;
+    @apply p-8 rounded-4xl gap-4 transition-shadow duration-300;
   }
 
   .card:hover {
