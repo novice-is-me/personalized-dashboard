@@ -7,7 +7,7 @@ const Dashboard = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className=" flex justify-between py-4">
+    <div className=" flex justify-between py-8">
       <div>
         <h1 className="text-gradient">DashFlow</h1>
         <p>Your personal dashboard</p>

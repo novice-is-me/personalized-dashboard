@@ -17,7 +17,7 @@ export const ThemeProvider = ({ children }) => {
     }
   }, []);
 
-  // Apply theme when theme state was changed or updated
+  // Apply theme when theme state was changed or update
   useEffect(() => {
     localStorage.setItem("theme", theme);
 

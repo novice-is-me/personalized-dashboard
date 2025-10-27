@@ -80,7 +80,8 @@
 }
 
 .theme-dark {
-  --background: #0d1b2a;
+  /* --background: #0d1b2a; */
+  --background: #081018;
   --foreground: #ced4da;
   --gradient: linear-gradient(
     90deg,
@@ -88,6 +89,9 @@
     rgba(108, 117, 125, 1) 51%,
     rgba(206, 212, 218, 1) 100%
   );
+  --card: #0a1520;
+  --border: #1c2a39;
+  --card-shadow: rgba(255, 255, 255, 0.08);
 }
 
 .theme-light {
@@ -99,6 +103,9 @@
     rgba(108, 117, 125, 1) 51%,
     rgba(33, 37, 41, 1) 100%
   );
+  --card: #ffffff;
+  --border: #e0e0e0;
+  --card-shadow: rgba(0, 0, 0, 0.1);
 }
 
 .theme-violet {
@@ -116,6 +123,9 @@
     rgba(224, 177, 203, 1) 51%,
     rgba(159, 134, 192, 1) 100%
   );
+  --card: #2c243e;
+  --border: #3a3150;
+  --card-shadow: rgba(159, 134, 192, 0.2);
 }
 
 .theme-earth {
@@ -133,6 +143,9 @@
     rgba(151, 169, 124, 1) 51%,
     rgba(113, 131, 85, 1) 100%
   );
+  --card: #f0f8e8;
+  --border: #d4e2c5;
+  --card-shadow: rgba(113, 131, 85, 0.2);
 }
 
 .theme-rainbow {
@@ -151,6 +164,9 @@
     rgba(172, 70, 161, 1) 50%,
     rgba(234, 105, 139, 1) 100%
   );
+  --card: #5e2a8c;
+  --border: #3a1f5c;
+  --card-shadow: rgba(234, 105, 139, 0.2);
 }
 
 /* ocean */
@@ -169,6 +185,9 @@
     rgba(0, 119, 182, 1) 53%,
     rgba(3, 4, 94, 1) 100%
   );
+  --card: #90e0ef;
+  --border: #48cae4;
+  --card-shadow: rgba(3, 4, 94, 0.2);
 }
 
 @layer base {
@@ -182,7 +201,7 @@
       --background-gradient,
       var(--background)
     ); /* gradient if available */
-    @apply text-foreground border-foreground;
+    @apply text-foreground border-border;
   }
 
   h1 {
@@ -202,6 +221,16 @@
 @layer components {
   .body-style {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    background: var(--card-bg);
+    box-shadow: 0 6px 25px var(--card-shadow);
+    @apply p-8 rounded-4xl flex flex-col items-center gap-4 transition-shadow duration-300;
+  }
+
+  .card:hover {
+    box-shadow: 0 10px 40px var(--card-shadow);
   }
 }
 
