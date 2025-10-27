@@ -1,13 +1,14 @@
 import "./App.css";
-import { Button } from "./components/ui/button";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import Dashboard from "./layouts/Dashboard";
 
 function App() {
   return (
-    <>
-      <Dashboard />
-      <Button variant="">Click Me</Button>
-    </>
+    <div className="body-style">
+      <ThemeProvider>
+        <Dashboard />
+      </ThemeProvider>
+    </div>
   );
 }
 
