@@ -1,4 +1,5 @@
 import "./App.css";
+import { DailyQoute } from "./components/DailyQoute";
 import { TimeGreet } from "./components/TimeGreet";
 import { Weather } from "./components/Weather";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -13,8 +14,9 @@ function App() {
           <div className="w-full">
             <TimeGreet />
           </div>
-          <div className=" grid grid-cols-1 md:grid-cols-3">
+          <div className=" grid grid-cols-1 md:grid-cols-3 gap-4">
             <Weather />
+            <DailyQoute />
           </div>
         </div>
       </ThemeProvider>
