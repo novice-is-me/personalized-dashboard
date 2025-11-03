@@ -1,7 +1,21 @@
+import { getWeatherData } from "@/api/weatherApi";
 import { CloudHail, CloudRainWind, Wind } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const Weather = () => {
+  const [temperature, setTemperature] = useState("");
+
+  useEffect(() => {
+    getWeatherData()
+      .then((data) => {
+        console.log("Weather Data in Weather.jsx:", data);
+        const wholeTemp = Math.round(data.temperature);
+        setTemperature(wholeTemp);
+        temperature.slice(0, 2);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className=" card border">
       <div className=" space-y-6">
@@ -15,7 +29,7 @@ export const Weather = () => {
           </div>
         </div>
         <div className=" border-b pb-4">
-          <h1>64°</h1>
+          <h1> {temperature} °</h1>
           <p>Rainy</p>
         </div>
         <div className=" flex gap-4">

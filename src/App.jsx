@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { DailyQoute } from "./components/DailyQoute";
 import { ImageComponent } from "./components/ImageComponent";
@@ -40,7 +40,7 @@ function App() {
   // Set up instance for sensors (like mouse, touch)
   const sensors = useSensors(useSensor(PointerSensor));
 
-  // ⚙️ Handle what happens when dragging ends
+  // Handle what happens when dragging ends
   const handleDragEnd = (event) => {
     const { active, over } = event;
 
