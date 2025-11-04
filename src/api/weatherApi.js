@@ -28,7 +28,7 @@ export async function getWeatherData() {
 
         const current = response.current();
 
-        console.log("Current Weather Data:", current);
+        // console.log("Current Weather Data:", current);
 
         if (!current) {
           throw new Error("No current weather data available.");

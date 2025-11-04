@@ -15,9 +15,7 @@ const getWeatherPromise = () => {
 const WeatherContent = () => {
   const [cloudIcon, setCloudIcon] = useState(null);
 
-  console.log("WeatherContent rendering...");
   const weatherData = use(getWeatherPromise()); // This is like async/await but for components
-  console.log("Got weather data in component:", weatherData);
 
   const wholeTemp = Math.round(weatherData.temperature);
   const windSpeed = Math.round(weatherData.windSpeed);
