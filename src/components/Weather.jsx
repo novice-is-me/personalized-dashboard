@@ -1,5 +1,12 @@
 import { getWeatherData } from "@/api/weatherApi";
-import { CloudHail, CloudSun, Cloudy, Sun, Wind } from "lucide-react";
+import {
+  CloudHail,
+  CloudMoon,
+  CloudSun,
+  Cloudy,
+  Sun,
+  Wind,
+} from "lucide-react";
 import React, { Suspense, use, useEffect, useState } from "react";
 
 // Instead of fetching data inside the use(), we create a promise here outside
@@ -22,10 +29,16 @@ const WeatherContent = () => {
   const cloudCover = Math.round(weatherData.cloudCover);
 
   useEffect(() => {
+    const hour = weatherData.time.getHours();
+
     if (cloudCover <= 10) {
       setCloudIcon(<Sun size={30} />);
     } else if (cloudCover > 10 && cloudCover <= 50) {
-      setCloudIcon(<CloudSun size={30} />);
+      if (hour < 12) {
+        setCloudIcon(<CloudSun size={30} />);
+      } else {
+        setCloudIcon(<CloudMoon size={30} />);
+      }
     } else {
       setCloudIcon(<Cloudy size={30} />);
     }
