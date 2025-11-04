@@ -27,6 +27,8 @@ const WeatherContent = () => {
   const wholeTemp = Math.round(weatherData.temperature);
   const windSpeed = Math.round(weatherData.windSpeed);
   const cloudCover = Math.round(weatherData.cloudCover);
+  const city = weatherData.location.city;
+  const country = weatherData.location.country.replace(" (the)", "");
 
   useEffect(() => {
     const hour = weatherData.time.getHours();
@@ -50,7 +52,9 @@ const WeatherContent = () => {
         <div className="flex justify-between items-center">
           <div>
             <p className="text-xl">Weather</p>
-            <p className="text-sm">Your city</p>
+            <p className="text-sm">
+              {city} city, {country}
+            </p>
           </div>
           <div>{cloudIcon}</div>
         </div>

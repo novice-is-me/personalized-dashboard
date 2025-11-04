@@ -7,6 +7,17 @@ export async function getWeatherData() {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
+        const locationQuery =
+          "https://api.bigdatacloud.net/data/reverse-geocode-client";
+
+        const locationResponse = await fetch(
+          `${locationQuery}?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+        );
+
+        const locationData = await locationResponse.json();
+        const city = locationData.city || locationData.locality || "your city";
+        const country = locationData.countryName || "";
+
         const params = {
           latitude,
           longitude,
@@ -28,13 +39,15 @@ export async function getWeatherData() {
 
         const current = response.current();
 
-        // console.log("Current Weather Data:", current);
-
         if (!current) {
           throw new Error("No current weather data available.");
         }
 
         const weatherData = {
+          location: {
+            city,
+            country,
+          },
           time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
           temperature: current.variables(0).value(),
           precipitation: current.variables(1).value(),
