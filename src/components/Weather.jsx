@@ -1,48 +1,76 @@
 import { getWeatherData } from "@/api/weatherApi";
-import { CloudHail, CloudRainWind, Wind } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { CloudHail, CloudSun, Cloudy, Sun, Wind } from "lucide-react";
+import React, { Suspense, use, useEffect, useState } from "react";
 
-export const Weather = () => {
-  const [temperature, setTemperature] = useState("");
+// Instead of fetching data inside the use(), we create a promise here outside
+let weatherPromise = null; // It doesnt create yet
+
+const getWeatherPromise = () => {
+  if (!weatherPromise) {
+    weatherPromise = getWeatherData(); // fetch the getWeatherData once
+  }
+  return weatherPromise;
+};
+
+const WeatherContent = () => {
+  const [cloudIcon, setCloudIcon] = useState(null);
+
+  console.log("WeatherContent rendering...");
+  const weatherData = use(getWeatherPromise()); // This is like async/await but for components
+  console.log("Got weather data in component:", weatherData);
+
+  const wholeTemp = Math.round(weatherData.temperature);
+  const windSpeed = Math.round(weatherData.windSpeed);
+  const cloudCover = Math.round(weatherData.cloudCover);
 
   useEffect(() => {
-    getWeatherData()
-      .then((data) => {
-        console.log("Weather Data in Weather.jsx:", data);
-        const wholeTemp = Math.round(data.temperature);
-        setTemperature(wholeTemp);
-        temperature.slice(0, 2);
-      })
-      .catch(console.error);
+    if (cloudCover <= 10) {
+      setCloudIcon(<Sun size={30} />);
+    } else if (cloudCover > 10 && cloudCover <= 50) {
+      setCloudIcon(<CloudSun size={30} />);
+    } else {
+      setCloudIcon(<Cloudy size={30} />);
+    }
   }, []);
 
   return (
-    <div className=" card border">
-      <div className=" space-y-6">
-        <div className=" flex justify-between items-center">
+    <div className="card border">
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
           <div>
-            <p className=" text-xl">Weather</p>
-            <p className=" text-sm">Your city</p>
+            <p className="text-xl">Weather</p>
+            <p className="text-sm">Your city</p>
           </div>
-          <div>
-            <CloudRainWind size={30} />
-          </div>
+          <div>{cloudIcon}</div>
         </div>
-        <div className=" border-b pb-4">
-          <h1> {temperature} °</h1>
-          <p>Rainy</p>
+        <div className="border-b pb-4">
+          <h1>{wholeTemp}°</h1>
         </div>
-        <div className=" flex gap-4">
-          <div className=" flex gap-2">
+        <div className="flex gap-4">
+          <div className="flex gap-2">
             <CloudHail />
-            <p>65%</p>
+            <p>{weatherData.precipitation}</p>
           </div>
-          <div className=" flex gap-2">
+          <div className="flex gap-2">
             <Wind />
-            <p>12 km/h</p>
+            <p>{windSpeed} km/h</p>
           </div>
         </div>
       </div>
     </div>
+  );
+};
+
+export const Weather = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="card border">
+          <p className=" text-xl">Loading weather...</p>
+        </div>
+      }
+    >
+      <WeatherContent />
+    </Suspense>
   );
 };

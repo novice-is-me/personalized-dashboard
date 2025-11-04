@@ -10,9 +10,15 @@ export async function getWeatherData() {
         const params = {
           latitude,
           longitude,
-          precipitation_unit: "mm",
-          current: ["temperature_2m"],
+          current: [
+            "temperature_2m",
+            "precipitation",
+            "wind_speed_10m",
+            "cloud_cover",
+          ],
         };
+
+        console.log("location coords:", latitude, longitude);
 
         const url = "https://api.open-meteo.com/v1/forecast";
         const responses = await fetchWeatherApi(url, params);
@@ -31,9 +37,10 @@ export async function getWeatherData() {
         const weatherData = {
           time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
           temperature: current.variables(0).value(),
+          precipitation: current.variables(1).value(),
+          windSpeed: current.variables(2).value(),
+          cloudCover: current.variables(3).value(),
         };
-
-        console.log("Weather Data:", weatherData);
 
         resolve(weatherData);
       } catch (error) {
