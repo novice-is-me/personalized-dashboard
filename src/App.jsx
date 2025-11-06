@@ -26,9 +26,9 @@ function App() {
   // Default order
   const defaultWidgets = [
     "time-greet",
+    "image-component",
     "weather",
     "daily-quote",
-    "image-component",
   ];
 
   // Load the save widget from local or use the default
@@ -82,9 +82,9 @@ function App() {
                   <div key={id} className={colSpan}>
                     <SortableCard id={id}>
                       {id === "time-greet" && <TimeGreet />}
+                      {id === "image-component" && <ImageComponent />}
                       {id === "weather" && <Weather />}
                       {id === "daily-quote" && <DailyQoute />}
-                      {id === "image-component" && <ImageComponent />}
                     </SortableCard>
                   </div>
                 );
