@@ -39,7 +39,6 @@ export const TimeGreet = () => {
     }
   }, []);
 
-  console.log("date time:", time);
   return (
     <div className="card border text-center flex flex-col items-center ">
       <div>{timeIcon}</div>

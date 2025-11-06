@@ -18,7 +18,6 @@ const QoutesContent = () => {
 
   useEffect(() => {
     setQuoteData(data);
-    console.log("quote data:", data);
   }, []);
 
   const retryMove = () => {
