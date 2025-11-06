@@ -29,8 +29,6 @@ export async function getWeatherData() {
           ],
         };
 
-        console.log("location coords:", latitude, longitude);
-
         const url = "https://api.open-meteo.com/v1/forecast";
         const responses = await fetchWeatherApi(url, params);
         const response = responses[0];

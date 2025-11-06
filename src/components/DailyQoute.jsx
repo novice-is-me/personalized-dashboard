@@ -1,16 +1,35 @@
+import { getQoutesData } from "@/api/QoutesApi";
 import { Quote, RefreshCcw } from "lucide-react";
-import React, { useState } from "react";
+import React, { Suspense, use, useEffect, useState } from "react";
 
-export const DailyQoute = () => {
+let quotePromise = null; // It doesnt create yet
+
+const getQuotePromise = () => {
+  if (!quotePromise) {
+    quotePromise = getQoutesData(); // fetch the getQoutesData once
+  }
+  return quotePromise;
+};
+
+const QoutesContent = () => {
   const [isRotating, setIsRotating] = useState(false);
+  const [quoteData, setQuoteData] = useState(null);
+  const data = use(getQuotePromise()); // This is like async/await but for components
+
+  useEffect(() => {
+    setQuoteData(data);
+    console.log("quote data:", data);
+  }, []);
+
   const retryMove = () => {
+    quotePromise = getQoutesData(); // reset the promise to fetch new data
     setIsRotating(true);
-    console.log("after", isRotating);
 
     setTimeout(() => {
       setIsRotating(false);
     }, 1000);
   };
+
   return (
     <div className=" card border">
       <div className=" space-y-6">
@@ -28,11 +47,25 @@ export const DailyQoute = () => {
         </div>
         <div className=" space-y-4">
           <p className=" text-[18px] font-bold">
-            "Innovation distinguishes between a leader and a follower."
+            {quoteData ? `"${quoteData.quote}"` : "Loading..."}
           </p>
-          <p> — Steve jobs</p>
+          <p> — {quoteData ? `"${quoteData.author}"` : "Loading..."}</p>
         </div>
       </div>
     </div>
+  );
+};
+
+export const DailyQoute = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="card border">
+          <p className=" text-xl">Loading qoutes...</p>
+        </div>
+      }
+    >
+      <QoutesContent />
+    </Suspense>
   );
 };
