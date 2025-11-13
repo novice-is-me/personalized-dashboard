@@ -60,6 +60,18 @@ function App() {
     });
   };
 
+  const onRemove = (id) => {
+    console.log("removing", id);
+    setWidgets((prev) => {
+      const newOrder = prev.filter((widgetId) => widgetId !== id);
+
+      // Save the new order in local
+      localStorage.setItem("widgetOrder", JSON.stringify(newOrder));
+
+      return newOrder;
+    });
+  };
+
   return (
     <div className="body-style space-y-6 overflow-hidden">
       <ThemeProvider>
@@ -80,7 +92,7 @@ function App() {
 
                 return (
                   <div key={id} className={colSpan}>
-                    <SortableCard id={id}>
+                    <SortableCard id={id} onRemove={onRemove}>
                       {id === "time-greet" && <TimeGreet />}
                       {id === "image-component" && <ImageComponent />}
                       {id === "weather" && <Weather />}

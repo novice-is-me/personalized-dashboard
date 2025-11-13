@@ -31,7 +31,7 @@ const ImageContent = () => {
   return (
     <div className=" card border max-h-[500px]">
       <div className=" space-y-6">
-        <div className=" flex justify-between items-center">
+        <div className=" flex justify-between items-center pt-4">
           <div className=" flex gap-2 items-center">
             <Image />
             <p className=" text-xl">Image of the Day</p>

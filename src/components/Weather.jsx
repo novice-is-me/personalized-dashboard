@@ -49,7 +49,7 @@ const WeatherContent = () => {
   return (
     <div className="card border">
       <div className="space-y-6">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center pt-4">
           <div>
             <p className="text-xl">Weather</p>
             <p className="text-sm">
