@@ -19,7 +19,7 @@ import { Weather } from "@/components/Weather";
 import { DailyQoute } from "@/components/DailyQoute";
 import { SortableCard } from "@/components/SortableCard";
 
-function Main() {
+function Home() {
   // Default order
   const defaultWidgets = [
     "time-greet",
@@ -101,4 +101,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Home;
