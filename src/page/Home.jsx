@@ -18,6 +18,7 @@ import { ImageComponent } from "@/components/ImageComponent";
 import { Weather } from "@/components/Weather";
 import { DailyQoute } from "@/components/DailyQoute";
 import { SortableCard } from "@/components/SortableCard";
+import { Task } from "@/components/Task";
 
 function Home() {
   // Default order
@@ -69,7 +70,7 @@ function Home() {
   };
 
   return (
-    <div className="body-style space-y-6 overflow-hidden">
+    <div className="body-style space-y-6 overflow-">
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -97,6 +98,9 @@ function Home() {
           </div>
         </SortableContext>
       </DndContext>
+      <div className=" border-t">
+        <Task />
+      </div>
     </div>
   );
 }
