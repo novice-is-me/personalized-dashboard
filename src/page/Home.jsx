@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   closestCenter, // center is the droppable area
@@ -19,6 +19,7 @@ import { Weather } from "@/components/Weather";
 import { DailyQoute } from "@/components/DailyQoute";
 import { SortableCard } from "@/components/SortableCard";
 import { Task } from "@/components/Task";
+import Calendar from "@/components/Calendar";
 
 function Home() {
   // Default order
@@ -100,6 +101,9 @@ function Home() {
       </DndContext>
       <div className=" border-t">
         <Task />
+      </div>
+      <div>
+        <Calendar />
       </div>
     </div>
   );

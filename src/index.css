@@ -230,6 +230,10 @@
   .card:hover {
     box-shadow: 0 10px 40px var(--card-shadow);
   }
+
+  .my-event {
+    @apply border border-blue-200 font-normal font-[Roboto] text-foreground;
+  }
 }
 
 @layer utilities {
